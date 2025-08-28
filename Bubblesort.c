@@ -19,6 +19,7 @@ int main() {
                 arr[j+1] = temp;
             }
         }
+        printf("pass %d :" , i+1);
         for (int k = 0; k < n; k++)
         {
             printf("%d ,",arr[k]);
