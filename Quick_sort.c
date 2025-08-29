@@ -1,7 +1,19 @@
 #include<stdio.h>
-void partition(int arr[] , int left, int right , int loc){
-    while (!(loc == left && loc == right))
+int comparisons = 0;
+int iterations = 0;
+
+void printArray(int arr[] , int n){
+    for(int i  = 0 ; i< n ; i++){
+        printf("%d, " ,arr[i] );
+    }
+    printf("\n");
+}
+
+void partition(int arr[] , int left, int right , int loc , int n){
+    while (left < right)
     {
+        comparisons++;
+
         if(loc == left){
             if (arr[loc] > arr[right]){
                 int temp = arr[loc];
@@ -30,15 +42,18 @@ void partition(int arr[] , int left, int right , int loc){
     
 }
 
-void quick_sort(int arr[], int left, int right) {
-    
+void quick_sort(int arr[], int left, int right,int n) {
     int loc = left;
     if (left < right)
     {
-        partition(arr, left, right, loc);
-        quick_sort(arr, left, loc - 1);
-        quick_sort(arr, loc + 1, right);
+        iterations++;
+        partition(arr, left, right, loc,n);
+        printf("After iteration %d: ", iterations);
+        printArray(arr, n);   
+        quick_sort(arr, left, loc - 1,n);
+        quick_sort(arr, loc + 1, right,n);
     }
+    
     
 }
 
@@ -46,19 +61,30 @@ void quick_sort(int arr[], int left, int right) {
 
 
 int main(){
-    int n ;
-    printf("enter the length of array: ");
-    scanf("%d" , &n);
+   int n;
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
     int arr[n];
-    for(int i =0 ; i < n ; i++){
-        printf("enter the element of array: ");
-        scanf("%d" , &arr[i]);
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
     }
-    quick_sort(arr , 0 , n-1 );
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d," , arr[i]);
-    }
+
+    printf("\nOriginal Array: ");
+    printArray(arr, n);
+
+    quick_sort(arr , 0 , n-1 ,n );
+
+    printf("\nFinal Sorted Array: ");
+    printArray(arr, n);
+
+    printf("\nTotal Iterations: %d", iterations);
+    printf("\nTotal Comparisons: %d\n", comparisons);
+    
+    
+    
+
     
 
 }
