@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include <limits.h>
 #define MAX_DATA  10
 int stack[MAX_DATA] ;
 int top = -1;
@@ -18,7 +19,7 @@ void push(){
 int pop(){
     if(top == -1){
         printf("underflow\n");
-        
+        return INT_MIN;
         
     }else{
         
