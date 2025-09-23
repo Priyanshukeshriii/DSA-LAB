@@ -58,7 +58,6 @@ void display() {
 int main() {
     int choice;
     while (1) {
-        printf("\n--- Stack Menu ---\n");
         printf("1. Create new Stack\n");
         printf("2. Push\n");
         printf("3. Pop\n");
