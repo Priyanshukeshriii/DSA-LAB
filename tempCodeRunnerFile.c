@@ -1,1 +1,1 @@
- // printf("%c\n",prefix[i]);
+#include <string.h>
