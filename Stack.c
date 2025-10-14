@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 100   // maximum stack size
+#define MAX 100   
 
 int stack[MAX];
-int top = -1;    // initially empty stack
+int top = -1;    
 
-// Function to create stack
+
 void createStack() {
-    top = -1; // reset stack
+    top = -1; 
     printf("Stack created successfully.\n");
 }
 
-// Push operation
+
 void push() {
     int value;
     if (top == MAX - 1) {
@@ -25,7 +25,7 @@ void push() {
     }
 }
 
-// Pop operation
+
 void pop() {
     if (top == -1) {
         printf("Stack Underflow! No elements to pop.\n");
@@ -34,7 +34,7 @@ void pop() {
     }
 }
 
-// Peek operation
+
 void peek() {
     if (top == -1) {
         printf("Stack is empty.\n");
@@ -43,7 +43,7 @@ void peek() {
     }
 }
 
-// Display stack
+
 void display() {
     if (top == -1) {
         printf("Stack is empty.\n");

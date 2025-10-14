@@ -54,8 +54,7 @@ int prefixChecker(char prefix[]){
     int stack[MAX];
     top =-1;
     for(int i = strlen(prefix) -1; i >= 0; i--){
-        // printf("entered\n");
-        // printf("%c\n",prefix[i]);
+        
         if(prefix[i] == ' '){
             continue;
         }
@@ -64,7 +63,7 @@ int prefixChecker(char prefix[]){
         }
         if(isdigit(prefix[i])){
 
-            // printf("digit %d\n",prefix[i]- '0');
+
             push(prefix[i] -'0',stack);
         }
         else if (prefix[i]=='+'||prefix[i]=='-'||prefix[i]=='*'||prefix[i]=='/'||prefix[i]=='^') {

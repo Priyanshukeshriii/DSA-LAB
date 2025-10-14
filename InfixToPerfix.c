@@ -7,7 +7,7 @@
 char stack[MAX];
 int top = -1;
 
-// Stack functions
+
 void push(char c) {
     if (top == MAX - 1) {
         printf("Stack overflow\n");
@@ -34,7 +34,7 @@ int isEmpty() {
     return top == -1;
 }
 
-// Operator precedence
+
 int precedence(char c) {
     if (c == '+' || c == '-') return 1;
     if (c == '*' || c == '/') return 2;
@@ -42,7 +42,7 @@ int precedence(char c) {
     return -1;
 }
 
-// Reverse a string
+
 void reverse(char exp[]) {
     int n = strlen(exp);
     for (int i = 0; i < n / 2; i++) {
@@ -58,7 +58,7 @@ void infixToPostfix(char infix[], char postfix[]) {
     for (int i = 0; i < strlen(infix); i++) {
         char c = infix[i];
         if (isalnum(c)) {
-            postfix[k++] = c;  // Operand → directly output
+            postfix[k++] = c; 
         }
         else if (c == '(') {
             push(c);
@@ -67,9 +67,9 @@ void infixToPostfix(char infix[], char postfix[]) {
             while (!isEmpty() && peek() != '(') {
                 postfix[k++] = pop();
             }
-            pop(); // remove '('
+            pop(); 
         }
-        else { // Operator
+        else { 
             while (!isEmpty() && 
                    ((precedence(peek()) > precedence(c)) ||
                    (precedence(peek()) == precedence(c) && c != '^'))) {
@@ -84,12 +84,12 @@ void infixToPostfix(char infix[], char postfix[]) {
     postfix[k] = '\0';
 }
 
-// Infix to Prefix
+
 void infixToPrefix(char infix[], char prefix[]) {
-    top = -1; // reset stack
+    top = -1; 
     reverse(infix);
 
-    // Swap brackets
+   
     for (int i = 0; i < strlen(infix); i++) {
         if (infix[i] == '(') infix[i] = ')';
         else if (infix[i] == ')') infix[i] = '(';
