@@ -1,4 +1,3 @@
-// 2. Conversion of an Infix to a Prefix (using stacks)
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -10,18 +9,25 @@ int top = -1;
 
 // Stack functions
 void push(char c) {
-    if(top == MAX -1){
-        printf("overflow");
-        return '\0';
+    if (top == MAX - 1) {
+        printf("Stack overflow\n");
+        return;
     }
     stack[++top] = c;
 }
+
 char pop() {
-    if(top == -1){
-        printf("underflow");
+    if (top == -1) {
+        printf("Stack underflow\n");
         return '\0';
     }
     return stack[top--];
+}
+
+char peek() {
+    if (top == -1)
+        return '\0';
+    return stack[top];
 }
 
 int isEmpty() {
@@ -39,7 +45,7 @@ int precedence(char c) {
 // Reverse a string
 void reverse(char exp[]) {
     int n = strlen(exp);
-    for (int i = 0; i < n/2; i++) {
+    for (int i = 0; i < n / 2; i++) {
         char temp = exp[i];
         exp[i] = exp[n - i - 1];
         exp[n - i - 1] = temp;
@@ -64,7 +70,9 @@ void infixToPostfix(char infix[], char postfix[]) {
             pop(); // remove '('
         }
         else { // Operator
-            while (!isEmpty() && precedence(peek()) >= precedence(c)) {
+            while (!isEmpty() && 
+                   ((precedence(peek()) > precedence(c)) ||
+                   (precedence(peek()) == precedence(c) && c != '^'))) {
                 postfix[k++] = pop();
             }
             push(c);
@@ -78,20 +86,18 @@ void infixToPostfix(char infix[], char postfix[]) {
 
 // Infix to Prefix
 void infixToPrefix(char infix[], char prefix[]) {
-    // Step 1: Reverse infix
+    top = -1; // reset stack
     reverse(infix);
 
-    // Step 2: Swap brackets
+    // Swap brackets
     for (int i = 0; i < strlen(infix); i++) {
         if (infix[i] == '(') infix[i] = ')';
         else if (infix[i] == ')') infix[i] = '(';
     }
 
-    // Step 3: Get postfix
     char postfix[MAX];
     infixToPostfix(infix, postfix);
 
-    // Step 4: Reverse postfix → prefix
     strcpy(prefix, postfix);
     reverse(prefix);
 }
@@ -106,4 +112,3 @@ int main() {
 
     return 0;
 }
-
