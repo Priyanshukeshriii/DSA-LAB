@@ -37,7 +37,7 @@ void parenthesisChecker(char exp[]) {
         else if (c == ')' || c == '}' || c == ']') {
             char x = pop();
             if (!isMatchingPair(x, c)) {
-                printf("Unbalanced expression ❌\n");
+                printf("Unbalanced expression \n");
                 return;
             }
         }

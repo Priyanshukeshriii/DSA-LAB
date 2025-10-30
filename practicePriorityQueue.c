@@ -18,7 +18,7 @@ void enqueue(int data, int priority) {
 
     int i = size - 1;
     
-    while (i >= 0 && pq[i].priority > priority) {
+    while (i >= 0 && pq[i].priority < priority) {
         pq[i + 1] = pq[i];
         i--;
     }
@@ -36,14 +36,11 @@ int dequeue() {
         return -1;
     }
 
-    int data = pq[0].data;
-    printf("Dequeued: data=%d, priority=%d\n", pq[0].data, pq[0].priority);
-
-    for (int i = 1; i < size; i++) {
-        pq[i - 1] = pq[i];
-    }
-
     size--;
+    int data = pq[0].data;
+    printf("Dequeued: data=%d, priority=%d\n", pq[size].data, pq[size].priority);
+
+
     return data;
 }
 

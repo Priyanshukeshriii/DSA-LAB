@@ -10,7 +10,7 @@ void printArray(int arr[], int n) {
     printf("\n");
 }
 
-// ✅ fixed: partition now RETURNS loc
+
 int partition(int arr[], int left, int right, int loc, int n) {
     while (left < right) {
         comparisons++;
