@@ -75,29 +75,115 @@ void traverse(){
     
 }
 
+void deleteAfterData(int value) {
+    if (top == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+
+    struct Node* temp = top;
+    while (temp != NULL && temp->data != value) {
+        temp = temp->next;
+    }
+
+    if (temp == NULL || temp->next == NULL) {
+        printf("No node found after data %d!\n", value);
+        return;
+    }
+    temp->next = temp->next->next;
+}
+
+void deleteBeforeData(int value) {
+    if (top == NULL || top->next == NULL) {
+        printf("No node exists before data %d!\n", value);
+        return;
+    }
+
+    
+    if (top->next->data == value) {
+        deleteFromFirst();
+        return;
+    }
+
+    struct Node* prev = NULL;
+    struct Node* curr = top;
+
+    while (curr->next != NULL && curr->next->data != value) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    if (curr->next == NULL) {
+        printf("Node with data %d not found!\n", value);
+        return;
+    }
+
+    
+    if (prev != NULL) {
+        prev->next = curr->next;
+    }
+}
+
+
 int main() {
-    addTofirst(10);
-    addTofirst(20);
-    addTofirst(30);
-    addTofirst(40);
-    printf("After adding elements:\n");
-    traverse();
+    int choice, data, index;
 
-    deleteFromFirst();
-    printf("\nAfter deleting first element:\n");
-    traverse();
+    while (1) {
+        printf("\n--- Linked List Deletion Menu ---\n");
+        printf("1. Add to First\n");
+        printf("2. Delete from First\n");
+        printf("3. Delete from Last\n");
+        printf("4. Delete from Index\n");
+        printf("5. Delete After Data\n");
+        printf("6. Delete Before Data\n");
+        printf("7. Traverse\n");
+        printf("8. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-    deleteFromLast();
-    printf("\nAfter deleting last element:\n");
-    traverse();
+        switch (choice) {
+            case 1:
+                printf("Enter data: ");
+                scanf("%d", &data);
+                addTofirst(data);
+                break;
 
-    deleteFromIndex(1);
-    printf("\nAfter deleting element at index 1:\n");
-    traverse();
+            case 2:
+                deleteFromFirst();
+                break;
 
-    deleteFromIndex(5);
-    printf("\nAfter trying to delete invalid index:\n");
-    traverse();
+            case 3:
+                deleteFromLast();
+                break;
 
-    return 0;
+            case 4:
+                printf("Enter index: ");
+                scanf("%d", &index);
+                deleteFromIndex(index);
+                break;
+
+            case 5:
+                printf("Enter data value (delete node AFTER this): ");
+                scanf("%d", &data);
+                deleteAfterData(data);
+                break;
+
+            case 6:
+                printf("Enter data value (delete node BEFORE this): ");
+                scanf("%d", &data);
+                deleteBeforeData(data);
+                break;
+
+            case 7:
+                traverse();
+                break;
+
+            case 8:
+                printf("Exiting...\n");
+                return 0;
+
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
 }

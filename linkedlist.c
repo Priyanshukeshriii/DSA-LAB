@@ -81,8 +81,57 @@ void addAtAnIndex(int data, int pos){
 }
 }
 
+void addAfterData(int newData, int existingData) {
+    struct Node* temp = top;
+
+    while (temp != NULL && temp->data != existingData) {
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("Node with data %d not found!\n", existingData);
+        return;
+    }
+
+    struct Node* newNode = (struct Node*) malloc(sizeof(struct Node));
+    newNode->data = newData;
+
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+
+void addBeforeData(int newData, int existingData) {
+    if (top == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+
+
+    if (top->data == existingData) {
+        addToFirst(newData);
+        return;
+    }
+
+    struct Node* temp = top;
+    while (temp->next != NULL && temp->next->data != existingData) {
+        temp = temp->next;
+    }
+
+    if (temp->next == NULL) {
+        printf("Node with data %d not found!\n", existingData);
+        return;
+    }
+
+    struct Node* newNode = (struct Node*) malloc(sizeof(struct Node));
+    newNode->data = newData;
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+
 int main() {
-    int choice, data, pos;
+    int choice, data, pos, existing;
 
     while (1) {
         printf("\n--- Linked List Menu ---\n");
@@ -90,8 +139,10 @@ int main() {
         printf("2. Add to End\n");
         printf("3. Add After Index\n");
         printf("4. Add at Index\n");
-        printf("5. Traverse\n");
-        printf("6. Exit\n");
+        printf("5. Add After Data\n");
+        printf("6. Add Before Data\n");
+        printf("7. Traverse\n");
+        printf("8. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -121,10 +172,22 @@ int main() {
                 break;
 
             case 5:
-                traverse();
+                printf("Enter new data and existing data: ");
+                scanf("%d %d", &data, &existing);
+                addAfterData(data, existing);
                 break;
 
             case 6:
+                printf("Enter new data and existing data: ");
+                scanf("%d %d", &data, &existing);
+                addBeforeData(data, existing);
+                break;
+
+            case 7:
+                traverse();
+                break;
+
+            case 8:
                 printf("Exiting...\n");
                 return 0;
 
