@@ -104,15 +104,15 @@ void deleteFromIndex(int index) {
         return;
     }
 
-    // Case 1: Only one node
+    
     if (last == last->next) {
         printf("%d is deleted\n", last->data);
-        free(last);
+        
         last = NULL;
         return;
     }
 
-    // Case 2: Delete first node
+    
     if (index == 0) {
         deleteFromfirst();
         return;
@@ -121,31 +121,31 @@ void deleteFromIndex(int index) {
     struct Node* temp = last->next;
     int count = 0;
 
-    // Traverse to the node just before the one to delete
+    
     while (count < index - 1 && temp->next != last->next) {
         temp = temp->next;
         count++;
     }
 
-    // Check if index is out of bounds
+    
     if (temp->next == last->next) {
         printf("Invalid index!\n");
         return;
     }
 
-    // Node to delete
+    
     struct Node* delNode = temp->next;
 
-    // If deleting last node
+    
     if (delNode == last) {
         deleteFromlast();
         return;
     }
 
-    // Re-link and free
+    
     temp->next = delNode->next;
     printf("%d is deleted\n", delNode->data);
-    free(delNode);
+    
 }
                                                                 
 void display() {
