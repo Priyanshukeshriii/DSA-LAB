@@ -1,1 +1,2 @@
-#include <string.h>
+addbeforeData(3,4);
+    // display();

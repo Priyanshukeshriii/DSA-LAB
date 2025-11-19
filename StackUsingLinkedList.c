@@ -44,7 +44,7 @@ void display(){
         printf("stack is empty");
     }
     struct Node* temp = top;
-    while (temp->next)
+    while (temp != NULL)
     {
         printf("%d\n", temp->data);
         temp = temp->next;

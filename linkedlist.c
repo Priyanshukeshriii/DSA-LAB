@@ -14,6 +14,7 @@ void addTofirst(int inputdata) {
     newNode->data = inputdata;
     newNode->next = top;
     top = newNode;
+    printf("done!");
 }
 
 
